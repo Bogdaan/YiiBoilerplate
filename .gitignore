@@ -44,3 +44,5 @@ index
 /console/config/*-local.php
 
 
+#editors files
+*~

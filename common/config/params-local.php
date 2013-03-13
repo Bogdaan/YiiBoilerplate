@@ -29,11 +29,14 @@ return array(
 //	'db.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}',
 //	'db.username' => '{DATABASE-USERNAME}',
 //	'db.password' => '{DATABASE-PASSWORD}',
+//	'db.prefix' => '{DATABASE-PREFIX}',
+
 //
 //	// test database {
 //	'testdb.name' => '',
 //	'testdb.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}_test',
 //	'testdb.username' => '{DATABASE-USERNAME}',
 //	'testdb.password' => '{DATABASE-PASSWORD}',
+//	'testdb.prefix' => '{DATABASE-PREFIX}',
 
 );

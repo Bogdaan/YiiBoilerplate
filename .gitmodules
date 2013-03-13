@@ -1,0 +1,18 @@
+[submodule "common/extensions/yii-bootstrap-gen"]
+	path = common/extensions/yii-bootstrap-gen
+	url = git@github.com:Bogdaan/yii-bootstrap-gen.git
+[submodule "common/extensions/yii-debug-toolbar"]
+	path = common/extensions/yii-debug-toolbar
+	url = git@github.com:Bogdaan/yii-debug-toolbar.git
+[submodule "common/extensions/yii-mail"]
+	path = common/extensions/yii-mail
+	url = git@github.com:Bogdaan/yii-mail.git
+[submodule "common/extensions/tinymce"]
+	path = common/extensions/tinymce
+	url = git@github.com:Bogdaan/tinymce.git
+[submodule "common/extensions/maintenancemode"]
+	path = common/extensions/maintenancemode
+	url = git@github.com:Bogdaan/MaintenanceMode.git
+[submodule "backend/modules/elfinder"]
+	path = backend/modules/elfinder
+	url = git@github.com:Bogdaan/yii-elfinder.git

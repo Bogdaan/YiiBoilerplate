@@ -21,6 +21,7 @@ return CMap::mergeArray(
 				'connectionString' => $params['testdb.connectionString'],
 				'username' => $params['testdb.username'],
 				'password' => $params['testdb.password'],
+				'tablePrefix' => $params['testdb.prefix'],				
 				'charset' => 'utf8'
 			),
 			*/

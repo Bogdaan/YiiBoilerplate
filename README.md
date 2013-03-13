@@ -1,16 +1,9 @@
-# YiiBoilerplate
-We use this folder structure setup on [Clevertech](http://www.clevertech.biz) for our own projects. 
+# YiiBoilerplate bundle
+Структура проекта для быстрой разработки, основана на YiiBoilerplate.
 
-### Overview
 
-**YiiBoilerplate**, aims to provide *Yii developers* an application folder structure with sufficient flexibility to satisfy development needs from simple to enterprise applications.
-
-It may look a little bit too complex at first sight but, at Clevertech, we understand that needs may vary along the development life cycle of a product in order to fulfill customer's requirements and that commonly forces developers to modify the initial folder structure, thus making very hard for a new developer to jump in and 'understand' where everything is located.
-
-In order to avoid such time consuming tasks, **ease the life of our beloved developers** and increase productivity, we make use of this folder structure template for our projects.
-
-### Overall Structure
-Below the directory structure we are using:
+### Структура
+Структура файлов проекта:
 
 	/
     backend/
@@ -134,55 +127,56 @@ Below the directory structure we are using:
     yiic
     yiic.bat
 
-When working in a team development environment, using any of the VCS (Version Control System) available (i.e. Git, SVN), the files and folders marked with an asterisk should **not** be included in the revision system.
-
-###Top Level Directories
-At the top-most level, we have:  
+###Корневой каталог
+В корневой директории находяться:  
   
-* ***backend***: the backend application which will be mainly used by site administrators to manage the whole system (avoiding admin modules at frontend application to avoid confusion)   
-* ***console***: the console application that is compound of the console commands required for the system.   
-* ***frontend***: the frontend application that is the main interface for end users. On a website development, this would be what the site users would see.  
-* ***common***: the directory whose content is shared among  all the above applications.
-* ***test***: the folder where we include all of our BDD system tests.
+* ***backend***: бэкенд, предназначеный для управления приложением.  
+* ***console***: консольные команды приложения.   
+* ***frontend***: фронтенд приложения, главный интефейс для пользователей.  
+* ***common***: общие файлы для фронтенда, бэкенда и консольного приложения.
+* ***test***: BDD тесты.
 
-The whole application is divided into three applications: backend, fronted and console. Following [the directory structure of the yii project site](http://www.yiiframework.com/wiki/155/the-directory-structure-of-the-yii-project-site), with some twist on its configuration. The common folder is to store all files (extensions, components, behaviors, models, etc… ) that are shared among the mentioned applications.
+Проект разделен на три приложения: бэкенд, фронтенд, консоль.
+Структура приложения аналогична [стуктуре директорий проекта yiiframework.com](http://www.yiiframework.com/wiki/155/the-directory-structure-of-the-yii-project-site)
 
-###Application Directories
-The directory structure of each application is very similar. For example **backend** and **frontend** both share the same directory structure with a slight variation at the ***www*** folder of the **frontend** and the inclusion of bootstrap theme and extensions for the **backend**, to easy the task to create Administrative panels.
+###Каталоги приложений
+Структура директорий каждого приложения почти одинакова.
 
-The shared folder structure is this one:  
+Общее назначение каталогов:  
 
-* ***components***: contains components (i.e. helpers, application components) that are only used by this application  
-* ***config***: contains application specific configuration files.
-* ***controllers***: contains controller classes
-* ***extensions***: Yii extensions that are only used by this application
-* ***lib***: third-party libraries that are only used by this application
-* ***models***: contains model classes that are specific for this application
-* ***modules***: contains modules that are only used by this application
-* ***views***: stores controller actions view scripts
-* ***widgets***: stores Yii widgets only used by this application. 
-* ***www***: the web root for this application.
+* ***components***: содержит компоненты (i.e. helpers, application components) которые могут быть использованы в приложении  
+* ***config***: файлы конфигурации.
+* ***controllers***: контроллеры
+* ***extensions***: Yii расширения
+* ***lib***: third-party библиотеки
+* ***models***: модели
+* ***modules***: модули
+* ***views***: представления
+* ***widgets***: виджеты 
+* ***www***: корневая директория приложения
 
-We have created **extensions** and **widgets** folders, that could had been obviously included in the **components** folder, in order to clearly differentiate the types of components that could exist into a Yii application and easy the task to find them. So, for example, developers won't search for a widget that renders a jQuery UI plugin within a folder that has application wide components, or helpers, or extensions, or… 
+We have created **extensions** and **widgets** folders, that could had been obviously included in the **components** folder,
+in order to clearly differentiate the types of components that could exist into a Yii application and easy the task to find them. 
+So, for example, developers won't search for a widget that renders a jQuery UI plugin within a folder that has application wide 
+components, or helpers, or extensions, or… 
 
-The directory structure for **console** application differs from the others as it doesn't require **controllers**, **views**, **widgets**, and **www**. It has a **commands** directory to store all console command class files.
+The directory structure for **console** application differs from the others as it doesn't require **controllers**, **views**,
+ **widgets**, and **www**. It has a **commands** directory to store all console command class files.
 
-When developing a large project with a long development cycle, we constantly need to adjust the database structure. For this reason, we also use the DB migration feature to keep track of database changes. We store all DB migrations under the **migrations** directory in **console**.
+When developing a large project with a long development cycle, we constantly need to adjust the database structure.
+For this reason, we also use the DB migration feature to keep track of database changes. 
+We store all DB migrations under the **migrations** directory in **console**.
 
-###The Common Directory
-The common directory contains the files that are shared among applications. For example, every application may need to access the database using ActiveRecord. Therefore, we can store the AR model classes under the common directory. Similarly, if some helper or widget classes are used in more than one application, we should also put them under common to avoid duplication of code.
-
-To facilitate the maintenance of code, we organize the common directory in a structure similar to that of an application. For example, we have components, models, lib, etc.
-
-
-<span style="float:right;">***- source: [Yii Framework Site](http://www.yiiframework.com/wiki/155/the-directory-structure-of-the-yii-project-site#hh3)***</span>
-<div style="clear:both">&nbsp;</div>
 
 ###Application Configurations
-Applications of the same system usually share some common configurations, such as DB connection configuration, application parameters, etc. In order to eliminate duplication of code, we should extract these common configurations and store them in a central place. In our setting, we put them under the config directory in **common**.
+Applications of the same system usually share some common configurations, such as DB connection configuration, application parameters, etc.
+In order to eliminate duplication of code, we should extract these common configurations and store them in a central place. 
+In our setting, we put them under the config directory in **common**.
 
 ####How to configure the application
-The configuration for this boilerplate is not that complicated as it seems at first sight. As mentioned before, if our system has both **backend** and **frontend** applications and they both share the same DB configuration. We just need to configure one of the files on the **config** sub-directory under the **common** folder.
+The configuration for this boilerplate is not that complicated as it seems at first sight.
+ As mentioned before, if our system has both **backend** and **frontend** applications and they both share 
+ the same DB configuration. We just need to configure one of the files on the **config** sub-directory under the **common** folder.
 
 The files within the config folder of each application and common folder requires a bit of explanation. When working in a team environment, different developers may have different development environments. These environments are also often different from the production environment. This is why the configuration folders on each application contains a list of files that try to avoid interference among the different environments. 
 
@@ -214,7 +208,7 @@ There is a slight difference between the ****-private.php*** and the ****-local.
 The base configuration should be put under version control, like regular source code, so that it can be shared by every developer. The local configuration should **not** be put under version control and should only exist in each developer's working directory.
 
 
-####The _runpostdeploy_ script
+#### Cкрипт _runpostdeploy_ 
 The project has a very useful script that automatically creates the required and **not** shared folders for a Yii application: the **runtime** and **assets** folders, extracts the configuration settings specified for a specific environment and copies them to the ****-env.php*** files and runs migrations when not on private environments -we believe that migrations should be always run manually by developers on their machines.
 
 From the application's root folder, to run the script simply do:
@@ -228,12 +222,25 @@ From the application's root folder, to run the script simply do:
 	* migrate: will run migrations
 	* no-migrate: will not run migrations (on private wont run them anyway)
 
-###YiiBooster library
-We have included [YiiBooster](http://yii-booster.clevertech.biz) widget library to the boilerplate. For more information regarding this library and its use
-please visit [YiiBooster Site](http://yii-booster.clevertech.biz).
+
+### Расширения YII
+В прокект включены следующие расширения:
+* tinimce - WYSIWYG редактор [tinymce](http://www.yiiframework.com/extension/tinymce/).
+* yii-mail - надстройка SwiftMailer, для отправки email [mail](http://www.yiiframework.com/extension/mail)
+* yii-debug-toolbar - удобная панель отладки [debug-toolbar](http://www.yiiframework.com/extension/yii-debug-toolbar/)
+* YiiBooster - надстройка Yii-Bootstrap  [YiiBooster](http://yii-booster.clevertech.biz)
+* MaintanceMode - расширение позволяет гибко перейти в "режим поддержки". [MaintanceMode](https://github.com/karagodin/MaintenanceMode)
+
+### Отличия от YiiBoilerplate
+* добавлен праметр "tablePrefix" (префикс таблиц) 
+* добавлены параметры уровня приложения (params-app.php)
+* добавлены sql файлы схемы БД, фикстур, удаления таблиц ( common/data/schema.sql, common/data/fixtures.sql, common/data/drop.schema.sql )
+
+### Ветка extended
+В эту ветку включены наиболее часто используемые контроллеры, модели, темы.
+* добавлены контроллеры: ConfigController, ArticleController, QuestionController, FeedbackController
+* добавлены модели: Feedback, Quesion, Article, Config
+ 
 
 ====
 
-> [![Clevertech](http://clevertech.biz/images/slir/w54-h36-c54:36/images/site/index/home/clevertech-logo.png)](http://www.clevertech.biz)    
-well-built beautifully designed web applications  
-[www.clevertech.biz](http://www.clevertech.biz)

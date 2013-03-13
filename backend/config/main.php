@@ -18,6 +18,7 @@ $params = require_once($backendConfigDir . DIRECTORY_SEPARATOR . 'params.php');
 Yii::setPathOfAlias('root', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 Yii::setPathOfAlias('backend', $root . DIRECTORY_SEPARATOR . 'backend');
+Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 Yii::setPathOfAlias('www', $root. DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR . 'www');
 /* uncomment if you need to use frontend folders */
 /* Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend'); */
@@ -63,15 +64,18 @@ return CMap::mergeArray(
 		),
 		/* uncomment and set if required */
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
-		/* 'modules' => array(
+		'modules' => array(
 			'gii' => array(
 				'class' => 'system.gii.GiiModule',
-				'password' => 'clevertech',
+				'password' => 'web-kmv',
 				'generatorPaths' => array(
 					'bootstrap.gii'
-				)
+				),
+				'ipFilters'=>array('127.0.0.1'),
+				'newFileMode'=>0655,
+				'newDirMode'=>0755,
 			)
-		), */
+		),
 		'components' => array(
 			'user' => array(
 				'allowAutoLogin'=>true,
@@ -85,18 +89,19 @@ return CMap::mergeArray(
 				// @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
 				'errorAction'=>'site/error'
 			),
-//			'db'=> array(
-//				'connectionString' => $params['db.connectionString'],
-//				'username' => $params['db.username'],
-//				'password' => $params['db.password'],
-//				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-//				'enableParamLogging' => YII_DEBUG,
-//				'charset' => 'utf8'
-//			),
+			'db'=> array(
+				'connectionString' => $params['db.connectionString'],
+				'username' => $params['db.username'],
+				'password' => $params['db.password'],
+                'tablePrefix' => $params['db.prefix'],
+				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
+				'enableParamLogging' => YII_DEBUG,
+				'charset' => 'utf8'
+			),
 			'urlManager' => array(
 				'urlFormat' => 'path',
 				'showScriptName' => false,
-				'urlSuffix' => '/',
+				'urlSuffix' => '.html',
 				'rules' => $params['url.rules']
 			),
 			/* make sure you have your cache set correctly before uncommenting */

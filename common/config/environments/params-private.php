@@ -25,14 +25,15 @@ return array(
 	'env.code' => 'private',
 	// DB connection configurations
 	'db.name' => '',
-	'db.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}',
-	'db.username' => '{DATABASE-USERNAME}',
-	'db.password' => '{DATABASE-PASSWORD}',
+	'db.connectionString' => 'mysql:host=localhost;dbname=yiiboilerplate',
+	'db.username' => 'yiiboilerplate',
+	'db.password' => 'yiiboilerplate',
+	'db.prefix' => 'tbl',
 
 	// test database {
 	'testdb.name' => '',
-	'testdb.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}_test',
-	'testdb.username' => '{DATABASE-USERNAME}',
-	'testdb.password' => '{DATABASE-PASSWORD}',
-
+	'testdb.connectionString' => 'mysql:host=localhost;dbname=yiiboilerplate_test',
+	'testdb.username' => 'yiiboilerplate',
+	'testdb.password' => 'yiiboilerplate',
+	'testdb.prefix' => 'tbl}',
 );
