@@ -412,3 +412,8 @@ shift+key.length) % key.length\n" .
 		"<" . "/noscript>";
 	return $txt;
 }
+
+
+function throw404() {
+    throw new CHttpException(404, 'The requested page does not exist');
+}

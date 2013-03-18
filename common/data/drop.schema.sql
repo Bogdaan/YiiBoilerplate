@@ -9,5 +9,7 @@ DROP TABLE IF EXISTS  `tbl_review`;
 DROP TABLE IF EXISTS  `tbl_question`;
 DROP TABLE IF EXISTS  `tbl_snippet`;
 DROP TABLE IF EXISTS  `tbl_slider`;
+DROP TABLE IF EXISTS  `tbl_seo`;
+DROP TABLE IF EXISTS  `tbl_seo_url`;
 
 

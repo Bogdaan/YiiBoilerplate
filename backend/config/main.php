@@ -74,7 +74,7 @@ return CMap::mergeArray(
 				'ipFilters'=>array('127.0.0.1'),
 				'newFileMode'=>0655,
 				'newDirMode'=>0755,
-			)
+			),
 		),
 		'components' => array(
 			'user' => array(

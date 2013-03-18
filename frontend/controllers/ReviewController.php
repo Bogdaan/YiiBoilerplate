@@ -3,24 +3,19 @@
 class ReviewController extends Controller {
 
     public function actionIndex(){
-        $model=new Review;
+        $criteria=new CDbCriteria;
+        $criteria->order = 'ordering';
+        $criteria->condition = 'is_deleted=0';
 
-        $entities = Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('{{review}}')
-            ->where('is_visible=1 and language=:lng', array('lng'=>app()->language) )
-            ->order('id DESC')
-            ->limit(15)
-            ->queryAll();
+        $pages = new CPagination(Review::model()->count($criteria));
+        $pages->pageSize = param('itemsPerPage', 10);
+        $pages->applyLimit($criteria);
 
-        $this->metaTitle      = t('Reviews');
-        $this->metaKeywords   = t('Reviews');
-        $this->metaDescription= t('Reviews');
+        $entities = Review::model()->cache(param('sqlCacheTime', 1000100), Review::getCacheDependency())->findAll($criteria);
 
-        $this->render('index', array(
-            'model' => $model,
-            'entities' => $entities,
-        ) );
+        $this->render('list', array(
+            'reviews' => $entities, 'pages' => $pages, $model = new Review,
+        ));        
     }
     
     
@@ -37,8 +32,8 @@ class ReviewController extends Controller {
             if($model->save()){
                 
                 $message = new YiiMailMessage;
-                $message->view = 'newreview';
-                $message->setSubject(app()->name.' - новый отзыв');
+                $message->view = 'new-review';
+                $message->setSubject(app()->name.' - new review');
                 $message->setBody(array('model'=>$model), 'text/html');
                 $message->addTo( param('email_to') );
                 $message->from = param('email_from');

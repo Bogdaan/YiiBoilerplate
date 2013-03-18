@@ -1,16 +1,10 @@
 <?php
-/**
- * m120805_131754_user_table_migration.php
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 8/12/12
- * Time: 9:52 PM
- */
+
 class m120805_131754_user_table_migration extends CDbMigration
 {
 	public function up()
 	{
-		$this->execute('CREATE TABLE `user` (
+		$this->execute('CREATE TABLE `{{user}}` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`username` varchar(45) DEFAULT NULL,
 			`password` varchar(255) DEFAULT NULL,
@@ -31,25 +25,14 @@ class m120805_131754_user_table_migration extends CDbMigration
 			UNIQUE KEY `email` (`email`)
 		) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8');
 
-		/* add demo users */
-		$demoUser = new User();
-		$demoUser->username = "demo";
-		$demoUser->email = "demo@clevertech.biz";
-		$demoUser->password = "clevertech";
 
-		$demoUser->save();
-
-		$adminUser = new User();
-		$adminUser->username = "admin";
-		$adminUser->email = "admin@clevertech.biz";
-		$adminUser->password = "clevertech";
-
-		$adminUser->save();
 
 	}
 
 	public function down()
 	{
+	    echo "FAIL: m120805_131754_user_table_migration does not support migration down.\n";
+	    return false;
 		$this->dropTable('user');
 	}
 }

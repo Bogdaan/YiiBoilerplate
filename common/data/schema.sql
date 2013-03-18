@@ -9,11 +9,12 @@ CREATE TABLE IF NOT EXISTS `tbl_feedback` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `message` text,
-
-  `language` varchar(2) DEFAULT 'ru',
+  `is_visible` tinyint(1) DEFAULT 1,
+  `is_deleted`  tinyint(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
  
 CREATE TABLE IF NOT EXISTS `tbl_user` (
@@ -28,8 +29,6 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `validation_key` varchar(255) DEFAULT NULL,
   `password_strategy` varchar(255) DEFAULT NULL,
   `requires_new_password` int(1) DEFAULT NULL,
-
-  `language` varchar(2) DEFAULT 'ru',
   `create_id` int(11) DEFAULT NULL,
   `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
   `update_id` int(11) DEFAULT NULL,
@@ -38,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `delete_time` TIMESTAMP DEFAULT 0,
   `status` int(11) DEFAULT NULL,  
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `tbl_review` (
@@ -47,12 +46,12 @@ CREATE TABLE IF NOT EXISTS `tbl_review` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `message` text,
-
-  `language` varchar(2) DEFAULT 'ru',
   `is_visible` int(1) DEFAULT 0,
+  `is_deleted`  tinyint(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `tbl_question` (
@@ -63,27 +62,23 @@ CREATE TABLE IF NOT EXISTS `tbl_question` (
   `email` varchar(255) DEFAULT NULL,
   `answer_name` varchar(255) DEFAULT NULL,
   `answer_content` text,  
-
-  `language` varchar(2) DEFAULT 'ru',
   `is_visible` int(1) DEFAULT 0,
+  `is_deleted`  tinyint(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `tbl_article_category`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
-
-  `name` varchar(50) NOT NULL,
-  `url` varchar(50) NOT NULL,
-  `meta_title` varchar(255) DEFAULT NULL,
-  `meta_description` varchar(255) DEFAULT NULL,
-  `meta_keywords` varchar(255) DEFAULT NULL,    
+  `name` varchar(50) NOT NULL,   
   `content` text NOT NULL,
-
-  `language` varchar(2) DEFAULT 'ru',
   `ordering` int(3) DEFAULT NULL,
+  `is_deleted` int(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -91,51 +86,96 @@ CREATE TABLE IF NOT EXISTS `tbl_article_category`(
 CREATE TABLE IF NOT EXISTS `tbl_article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` int(11) DEFAULT NULL,
-
+  `name` varchar(255) NOT NULL,
   `short_content` text DEFAULT NULL,
   `content` text NOT NULL,
-  `image` varchar(75) DEFAULT NULL,
-
-  `name` varchar(50) NOT NULL,
-  `url` varchar(50) NOT NULL,
-  `external_url` varchar(50) DEFAULT NULL,  
-  `meta_title` varchar(255) NOT NULL,
-  `meta_description` varchar(255) NOT NULL,
-  `meta_keywords` varchar(255) NOT NULL,
-
-  `language` varchar(2) DEFAULT 'ru',
-  `is_visible` tinyint(1) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `is_onmain`  tinyint(1) DEFAULT 0,
-  `is_specialoffer`  tinyint(1) DEFAULT 0,
-  `is_service`  tinyint(1) DEFAULT 0,
+  `is_visible` tinyint(1) DEFAULT 1,
+  `is_deleted`  tinyint(1) DEFAULT 0,
   `ordering` int(3) DEFAULT NULL,
   `updated_at` TIMESTAMP DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `tbl_slider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `image` varchar(100) DEFAULT NULL,
-
-  `language` varchar(2) DEFAULT 'ru',
-  `is_visible` tinyint(1) NOT NULL,
-  `ordering` int(3) DEFAULT NULL,
+  `stype` int(11) DEFAULT 0,
+  `position` varchar(255) DEFAULT NULL,
+  `is_visible` tinyint(1) DEFAULT 1,
+  `is_deleted` tinyint(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS `tbl_slider_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slider_id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `is_visible` tinyint(1) DEFAULT 1,
+  `is_deleted` tinyint(1) DEFAULT 0,
+  `ordering` int(3) DEFAULT NULL,
+  `updated_at` TIMESTAMP DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `tbl_snippet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-
+  `position` varchar(255) DEFAULT NULL,
   `content` text DEFAULT NULL,
-  `language` varchar(2) DEFAULT 'ru',
-  `is_visible` tinyint(1) NOT NULL,
+  `is_visible` tinyint(1) DEFAULT 1,
+  `is_deleted` tinyint(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS `tbl_seo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `param_name` varchar(255) DEFAULT NULL,
+  `param_value` varchar(255) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS `tbl_seo_url` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `modelId` int(11) NOT NULL,
+  `modelName` varchar(255) NOT NULL,
+  `metaUrl` varchar(255) DEFAULT NULL,
+  `metaTitle` varchar(255) DEFAULT NULL,
+  `metaDescription` varchar(255) DEFAULT NULL,
+  `metaKeywords` varchar(255) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT 0,
+  `updated_at` TIMESTAMP DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY modelId_key (`modelId`),
+  KEY metaUrl_key (`metaUrl`(5))
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS `tbl_new` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `short_content` text DEFAULT NULL,
+  `content` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `is_onmain`  tinyint(1) DEFAULT 0,
+  `is_visible` tinyint(1) DEFAULT 1,
+  `is_deleted`  tinyint(1) DEFAULT 0,
+  `ordering` int(3) DEFAULT NULL,
+  `updated_at` TIMESTAMP DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

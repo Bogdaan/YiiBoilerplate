@@ -3,24 +3,19 @@
 class QuestionController extends Controller {
 
     public function actionIndex(){
-        $model=new Question;
+        $criteria=new CDbCriteria;
+        $criteria->order = 'ordering';
+        $criteria->condition = 'is_deleted=0';
 
-        $entities = app()->db->createCommand()
-            ->select('*')
-            ->from('{{question}}')
-            ->where('is_visible=1 and language=:lng', array('lng'=>app()->language) )
-            ->order('id DESC')
-            ->limit(15)
-            ->queryAll();        
-        
-        $this->metaTitle      = t('Questions');
-        $this->metaKeywords   = t('Questions');
-        $this->metaDescription= t('Questions');
+        $pages = new CPagination(Question::model()->count($criteria));
+        $pages->pageSize = param('itemsPerPage', 10);
+        $pages->applyLimit($criteria);
 
-        $this->render('index', array(
-            'entities' => $entities,
-            'model'=>$model,
-        ) );
+        $entities = Question::model()->cache(param('sqlCacheTime', 1000100), Question::getCacheDependency())->findAll($criteria);
+
+        $this->render('list', array(
+            'questions' => $entities, 'pages' => $pages, 'model'=>new Question,
+        ));
     }
     
     
@@ -29,26 +24,26 @@ class QuestionController extends Controller {
 
         if(isset($_POST['Question']))
         {
-            $model->attributes=$_POST['Question'];
+            $model->attributes = $_POST['Question'];
             $model->is_visible = 0;
-            $model->language = app()->language;
-            $model->created_at = date(DateTime::W3C);
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->updated_at = $model->created_at; 
 
             if($model->save()){
-                
+
                 $message = new YiiMailMessage;
-                $message->view = 'newquestion';
-                $message->setSubject(app()->name.' - новый вопрос');
-                $message->setBody(array('model'=>$model), 'text/html');
+                $message->view = 'new-question';
+                $message->setSubject( app()->name.' - new question' );
+                $message->setBody( array('model'=>$model), 'text/html');
                 $message->addTo( param('email_to') );
                 $message->from = param('email_from');
                 app()->mail->send($message);
 
-                $this->redirect(array('success') );                
+                $this->redirect( array('success') );                
             }
         }
 
-        $this->render('create',array(
+        $this->render('create', array(
             'model'=>$model,
         ));
     }

@@ -28,12 +28,12 @@ return array(
 	'db.connectionString' => 'mysql:host=localhost;dbname=yiiboilerplate',
 	'db.username' => 'yiiboilerplate',
 	'db.password' => 'yiiboilerplate',
-	'db.prefix' => 'tbl',
+	'db.prefix' => 'tbl_',
 
 	// test database {
 	'testdb.name' => '',
-	'testdb.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}_test',
-	'testdb.username' => '{DATABASE-USERNAME}',
-	'testdb.password' => '{DATABASE-PASSWORD}',
-	'testdb.prefix' => '{DATABASE-PREFIX}',
+	'testdb.connectionString' => 'mysql:host=localhost;dbname=yiiboilerplate_test',
+	'testdb.username' => 'yiiboilerplate',
+	'testdb.password' => 'yiiboilerplate',
+	'testdb.prefix' => 'tbl_',
 );

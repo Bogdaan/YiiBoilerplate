@@ -2,56 +2,41 @@
 
 class ArticleController extends Controller {
 
-    public function actionIndex() {
-        $entities = Article::model()->findLast(10);
-    
-        $this->metaTitle      = t('Articles');
-        $this->metaKeywords   = t('Articles');
-        $this->metaDescription= t('Articles');
-    
-        $this->render('viewcategory', array(
-            'entities' => $entities,
-        ) );
+    public function actionIndex(){
+        $criteria=new CDbCriteria;
+        $criteria->order = 'ordering';
+        $criteria->condition = 'is_deleted=0';
+
+        $pages = new CPagination(Article::model()->count($criteria));
+        $pages->pageSize = param('itemsPerPage', 10);
+        $pages->applyLimit($criteria);
+
+        $entities = Article::model()->cache(param('sqlCacheTime', 1000100), Article::getCacheDependency())->findAll($criteria);
+
+        $this->render('list', array(
+            'articles' => $entities, 'pages' => $pages
+        ));
     }
 
 
-    public function actionView($url=null) {
-        $entity = Article::model()->findArticleByUrl($url);
-    
-        if(empty($entity)){
-            throw new CHttpException(404, t('Required page not found') );
+    public function actionView($id=1, $url=''){
+        $criteria=new CDbCriteria;
+        $criteria->condition = 'is_deleted=0';
+
+        if($url && $this->seo){
+            $id = $this->seo->modelId;
+        }elseif($url && !$this->seo){
+            throw404();
         }
         
-        $this->metaTitle      = $entity['meta_title'];
-        $this->metaKeywords   = $entity['meta_keywords'];
-        $this->metaDescription= $entity['meta_description'];
-    
-        $this->render('viewarticle', array(
-            'entity' => $entity,
-        ) );
-    }
-
-
-    public function actionViewcategory($url=null) {
-        $entity  = ArticleCategory::model()->find('url=:url', array(':url'=>$url) );
-
-        if(empty($entity)){
-            throw new CHttpException(404, t('Required page not found') );
+        $article = $model->findByPk($id, $criteria);
+        if(!$article){
+            throw404();
         }
 
-        $entities = ArticleCategory::model()->findCategoryArticlesById($entity->id, 1, 10);
-
-        if(empty($entities)){
-            throw new CHttpException(404, t('Required page not found') );
-        }
-
-        $this->metaTitle      = $entity['meta_title'];
-        $this->metaKeywords   = $entity['meta_keywords'];
-        $this->metaDescription= $entity['meta_description'];            
-
-        $this->render('viewcategory', array(
-            'entities' => $entities,
-        ) );
+        $this->render('view', array(
+            'article'=>$article
+        ));
     }
 
 }

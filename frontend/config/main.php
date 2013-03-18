@@ -54,10 +54,21 @@ return CMap::mergeArray(
 			'application.components.*',
 			'application.controllers.*',
 			'application.models.*'
-		),
+		),		
 		/* uncomment and set if required */
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
-		/* 'modules' => array(), */
+        'modules' => array(
+            'gii' => array(
+                'class' => 'system.gii.GiiModule',
+                'password' => 'web-kmv',
+                'generatorPaths' => array(
+                    'bootstrap.gii'
+                ),
+                'ipFilters'=>array('127.0.0.1'),
+                'newFileMode'=>0655,
+                'newDirMode'=>0755,
+            ),
+        ),
 		'components' => array(
 			'errorHandler' => array(
 				// @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail

@@ -1,12 +1,5 @@
 <?php
 /**
- * User.php
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 11:42 PM
- */
-/**
  * This is the model class for table "{{user}}".
  *
  * The followings are the available columns in table '{{user}}':
@@ -29,7 +22,7 @@
  * @property integer $delete_time
  * @property integer $status
  */
-class User extends CActiveRecord
+class User extends CommonModel
 {
 
 	/**
@@ -56,7 +49,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return '{{user}}';
 	}
 
 	/**
