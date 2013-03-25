@@ -79,10 +79,7 @@ class SeoUrl extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-    
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max(updated_at) from {{seo_url}}');
-    }    
+
 
     /**
      * @return array values (metaTitle, metaK, metaD)
