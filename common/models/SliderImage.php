@@ -17,6 +17,8 @@
  */
 class SliderImage extends CActiveRecord
 {
+	public const MODEL = 'SliderImage';
+	public const MODELTABLE = '{{slider_image}}';
 
 	public static function model($className=__CLASS__)
 	{
@@ -28,7 +30,7 @@ class SliderImage extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{slider_image}}';
+		return self::MODELTABLE;
 	}
 
 	/**
@@ -76,8 +78,7 @@ class SliderImage extends CActiveRecord
 
 	public function search()
 	{
-		$criteria=new CDbCriteria;
-        $criteria->condition = 'is_deleted=0';
+		$criteria=self::getCriteriaActive();
 
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
@@ -87,8 +88,4 @@ class SliderImage extends CActiveRecord
 		));
 	}
     
-    
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{slider_image}}');
-    }
 }

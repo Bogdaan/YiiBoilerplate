@@ -15,6 +15,8 @@
  */
 class Snippet extends CommonModel
 {
+	public const MODEL = 'Snippet';
+	public const MODELTABLE = '{{snippet}}';
 
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +26,7 @@ class Snippet extends CommonModel
 
 	public function tableName()
 	{
-		return '{{snippet}}';
+		return self::MODELTABLE;
 	}
 
 
@@ -76,7 +78,4 @@ class Snippet extends CommonModel
 	}
 
 
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{snippet}}');
-    }
 }

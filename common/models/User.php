@@ -24,6 +24,8 @@
  */
 class User extends CommonModel
 {
+	public const MODEL = 'User';
+	public const MODELTABLE = '{{user}}';
 
 	/**
 	 * @var string attribute used for new passwords on user's edition
@@ -49,7 +51,7 @@ class User extends CommonModel
 	 */
 	public function tableName()
 	{
-		return '{{user}}';
+		return self::MODELTABLE;
 	}
 
 	/**

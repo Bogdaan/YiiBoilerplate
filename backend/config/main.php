@@ -69,7 +69,8 @@ return CMap::mergeArray(
 				'class' => 'system.gii.GiiModule',
 				'password' => 'web-kmv',
 				'generatorPaths' => array(
-					'bootstrap.gii'
+					'bootstrap.gii',
+					'common.extensions.gii-templates',
 				),
 				'ipFilters'=>array('127.0.0.1'),
 				'newFileMode'=>0655,

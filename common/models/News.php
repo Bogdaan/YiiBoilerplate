@@ -16,8 +16,11 @@
  * @property integer $updated_at
  * @property integer $created_at
  */
-class News extends CActiveRecord
+class News extends CommonModel
 {
+	public const MODEL = 'News';
+	public const MODELTABLE = '{{news}}';
+
 
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +30,7 @@ class News extends CActiveRecord
 
 	public function tableName()
 	{
-		return '{{new}}';
+		return self::MODELTABLE;
 	}
 
 
@@ -71,8 +74,7 @@ class News extends CActiveRecord
 
 	public function search()
 	{
-		$criteria=new CDbCriteria;
-        $criteria->condition = 'is_deleted=0';
+		$criteria=self::getCriteriaActive();
 
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('short_content',$this->short_content,true);
@@ -83,7 +85,4 @@ class News extends CActiveRecord
 		));
 	}
 
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{new}}');
-    }
 }

@@ -17,7 +17,10 @@
  */
 class Feedback extends CommonModel
 {
+	public const MODEL = 'Feedback';
+	public const MODELTABLE = '{{feedback}}';
 
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -68,8 +71,7 @@ class Feedback extends CommonModel
 
 	public function search()
 	{
-		$criteria=new CDbCriteria;
-        $criteria->condition = 'is_deleted=0';
+		$criteria=self::getCriteriaActive();
 
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('subject',$this->subject,true);
@@ -82,7 +84,4 @@ class Feedback extends CommonModel
 		));
 	}
 
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{feedback}}');
-    }
 }

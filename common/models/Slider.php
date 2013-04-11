@@ -12,8 +12,10 @@
  * @property string $updated_at
  * @property string $created_at
  */
-class Slider extends CActiveRecord
+class Slider extends CommonModel
 {
+	public const MODEL = 'Slider';
+	public const MODELTABLE = '{{slider}}';
 
 	public static function model($className=__CLASS__)
 	{
@@ -23,7 +25,7 @@ class Slider extends CActiveRecord
 
 	public function tableName()
 	{
-		return '{{slider}}';
+		return self::MODELTABLE;
 	}
 
 
@@ -60,8 +62,7 @@ class Slider extends CActiveRecord
 
 	public function search()
 	{
-		$criteria=new CDbCriteria;
-		$criteria->condition = 'is_deleted=0';
+		$criteria=self::getCriteriaActive();
 
 		$criteria->compare('stype',$this->stype);
 		$criteria->compare('position',$this->position,true);
@@ -70,9 +71,5 @@ class Slider extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-    
-    
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{slider}}');
-    }
+ 
 }

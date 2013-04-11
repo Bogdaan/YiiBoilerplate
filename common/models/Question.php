@@ -18,7 +18,10 @@
  */
 class Question extends CommonModel
 {
-
+	public const MODEL = 'Question';
+	public const MODELTABLE = '{{question}}';
+	
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -26,7 +29,7 @@ class Question extends CommonModel
 
 	public function tableName()
 	{
-		return '{{question}}';
+		return self::MODELTABLE;
 	}
     
 
@@ -71,8 +74,7 @@ class Question extends CommonModel
 
 	public function search()
 	{
-		$criteria=new CDbCriteria;
-        $criteria->condition = 'is_deleted=0';
+		$criteria=self::getCriteriaActive();
 
 		$criteria->compare('question_name',$this->question_name,true);
 		$criteria->compare('question_content',$this->question_content,true);
@@ -85,8 +87,5 @@ class Question extends CommonModel
 			'criteria'=>$criteria,
 		));
 	}
-    
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{question}}');
-    }
+
 }

@@ -5,6 +5,8 @@
  */
 class Seo extends CommonModel
 {
+	public const MODEL = 'Seo';
+	public const MODELTABLE = '{{seo}}';
 
     public static function model($className=__CLASS__)
     {
@@ -13,7 +15,7 @@ class Seo extends CommonModel
 
     public function tableName()
     {
-        return '{{seo}}';
+        return self::MODELTABLE;
     }
 
     public function rules()

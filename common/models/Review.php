@@ -16,6 +16,8 @@
  */
 class Review extends CommonModel
 {
+	public const MODEL = 'Review';
+	public const MODELTABLE = '{{review}}';
 
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +27,7 @@ class Review extends CommonModel
 
 	public function tableName()
 	{
-		return '{{review}}';
+		return self::MODELTABLE;
 	}
 
 
@@ -79,8 +81,4 @@ class Review extends CommonModel
 		));
 	}
 
-
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{review}}');
-    }
 }

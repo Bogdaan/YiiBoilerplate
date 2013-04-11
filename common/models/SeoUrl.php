@@ -15,8 +15,10 @@
  * @property string $updated_at
  * @property string $created_at
  */
-class SeoUrl extends CActiveRecord
+class SeoUrl extends CommonModel
 {
+	public const MODEL = 'SeoUrl';
+	public const MODELTABLE = '{{seo_url}}';
 
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +28,7 @@ class SeoUrl extends CActiveRecord
 
 	public function tableName()
 	{
-		return '{{seo_url}}';
+		return self::MODELTABLE;
 	}
 
 
@@ -67,8 +69,7 @@ class SeoUrl extends CActiveRecord
 
 	public function search()
 	{
-		$criteria=new CDbCriteria;
-        $criteria->condition = 'is_deleted=0';
+		$criteria=self::getCriteriaActive();
 
 		$criteria->compare('modelName',$this->modelName,true);
 		$criteria->compare('metaTitle',$this->metaTitle,true);
@@ -85,13 +86,13 @@ class SeoUrl extends CActiveRecord
      * @return array values (metaTitle, metaK, metaD)
      */
     public static function getPageTKD($url){
-        
-        $seo = SeoUrl::model()
-            ->cache(param('sqlCacheTime', 1000100), SeoUrl::getCacheDependency() )
-            ->find('is_deleted=0 and metaUrl=:metaUrl', array(':metaUrl'=>$url) );
+        $c = new CDbCriteria;
+		$c->addColumnCondition(array('metaUrl'=>$url));
+		
+        $seo = SeoUrl::fetchOne($c);
 
         if( $seo ){
-            return array( $seo['metaTitle'], $seo['metaKeywords'], $seo['metaDescription'] );
+            return array( $seo->metaTitle, $seo->metaKeywords, $seo->metaDescription );
         }else{
             return array( param('siteTitle'), param('siteKeywords'), param('siteDescription') );
         }
@@ -102,19 +103,10 @@ class SeoUrl extends CActiveRecord
      * @returm SeoUrl object
      */
     public static function getByUrl($url){
-        $criteria = new CDbCriteria;
-        $criteria->condition = 'metaUrl=:metaUrl';
-        $criteria->params = array(':metaUrl'=>$url);
-
-        $seo = SeoUrl::model()
-            ->cache(param('sqlCacheTime', 1000100), SeoUrl::getCacheDependency() )
-            ->find($criteria);
-
+        $c = new CDbCriteria;
+		$c->addColumnCondition(array('metaUrl'=>$url));
+        $seo = SeoUrl::fetchOne($c);
         return $seo;
     }
-    
-    
-    public static function getCacheDependency(){
-        return new CDbCacheDependency('select max("updated_at") from {{seo_url}}');
-    }    
+
 }

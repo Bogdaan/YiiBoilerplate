@@ -13,6 +13,8 @@
  */
 class ArticleCategory extends CommonModel
 {
+	public const MODEL = 'ArticleCategory';
+	public const MODELTABLE = '{{article_category}}';
 
     public static function model($className=__CLASS__)
     {
@@ -22,7 +24,7 @@ class ArticleCategory extends CommonModel
 
     public function tableName()
     {
-        return '{{article_category}}';
+        return self::MODELTABLE;
     }
 
 
@@ -61,8 +63,7 @@ class ArticleCategory extends CommonModel
 
     public function search()
     {
-        $criteria=new CDbCriteria;
-        $criteria->condition = 'is_deleted=0';
+        $criteria=self::getCriteriaActive();
 
         $criteria->compare('id',$this->id);
         $criteria->compare('name',$this->name,true);
