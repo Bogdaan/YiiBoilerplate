@@ -24,8 +24,8 @@
  */
 class User extends CommonModel
 {
-	public const MODEL = 'User';
-	public const MODELTABLE = '{{user}}';
+	const MODEL = 'User';
+	const MODELTABLE = '{{user}}';
 
 	/**
 	 * @var string attribute used for new passwords on user's edition

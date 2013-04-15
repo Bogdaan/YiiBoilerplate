@@ -17,8 +17,8 @@
  */
 class SliderImage extends CActiveRecord
 {
-	public const MODEL = 'SliderImage';
-	public const MODELTABLE = '{{slider_image}}';
+	const MODEL = 'SliderImage';
+	const MODELTABLE = '{{slider_image}}';
 
 	public static function model($className=__CLASS__)
 	{

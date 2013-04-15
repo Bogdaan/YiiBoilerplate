@@ -14,8 +14,8 @@
  */
 class Slider extends CommonModel
 {
-	public const MODEL = 'Slider';
-	public const MODELTABLE = '{{slider}}';
+	const MODEL = 'Slider';
+	const MODELTABLE = '{{slider}}';
 
 	public static function model($className=__CLASS__)
 	{

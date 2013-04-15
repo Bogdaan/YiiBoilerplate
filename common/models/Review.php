@@ -16,8 +16,8 @@
  */
 class Review extends CommonModel
 {
-	public const MODEL = 'Review';
-	public const MODELTABLE = '{{review}}';
+	const MODEL = 'Review';
+	const MODELTABLE = '{{review}}';
 
 	public static function model($className=__CLASS__)
 	{

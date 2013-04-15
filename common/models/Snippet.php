@@ -15,8 +15,8 @@
  */
 class Snippet extends CommonModel
 {
-	public const MODEL = 'Snippet';
-	public const MODELTABLE = '{{snippet}}';
+	const MODEL = 'Snippet';
+	const MODELTABLE = '{{snippet}}';
 
 	public static function model($className=__CLASS__)
 	{

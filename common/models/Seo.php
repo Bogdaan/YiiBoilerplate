@@ -5,8 +5,8 @@
  */
 class Seo extends CommonModel
 {
-	public const MODEL = 'Seo';
-	public const MODELTABLE = '{{seo}}';
+	const MODEL = 'Seo';
+	const MODELTABLE = '{{seo}}';
 
     public static function model($className=__CLASS__)
     {

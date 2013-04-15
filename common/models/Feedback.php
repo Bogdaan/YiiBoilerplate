@@ -17,8 +17,8 @@
  */
 class Feedback extends CommonModel
 {
-	public const MODEL = 'Feedback';
-	public const MODELTABLE = '{{feedback}}';
+	const MODEL = 'Feedback';
+	const MODELTABLE = '{{feedback}}';
 
 	
 	public static function model($className=__CLASS__)

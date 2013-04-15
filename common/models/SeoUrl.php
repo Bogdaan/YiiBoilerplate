@@ -17,8 +17,8 @@
  */
 class SeoUrl extends CommonModel
 {
-	public const MODEL = 'SeoUrl';
-	public const MODELTABLE = '{{seo_url}}';
+	const MODEL = 'SeoUrl';
+	const MODELTABLE = '{{seo_url}}';
 
 	public static function model($className=__CLASS__)
 	{

@@ -19,8 +19,8 @@
  */
 class Article extends CommonModel
 {
-	public const MODEL = 'Article';
-	public const MODELTABLE = '{{article}}';
+	const MODEL = 'Article';
+	const MODELTABLE = '{{article}}';
 	
 	
     public static function model($className=__CLASS__)

@@ -18,8 +18,8 @@
  */
 class Question extends CommonModel
 {
-	public const MODEL = 'Question';
-	public const MODELTABLE = '{{question}}';
+	const MODEL = 'Question';
+	const MODELTABLE = '{{question}}';
 	
 	
 	public static function model($className=__CLASS__)

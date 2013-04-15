@@ -13,8 +13,8 @@
  */
 class ArticleCategory extends CommonModel
 {
-	public const MODEL = 'ArticleCategory';
-	public const MODELTABLE = '{{article_category}}';
+	const MODEL = 'ArticleCategory';
+	const MODELTABLE = '{{article_category}}';
 
     public static function model($className=__CLASS__)
     {
