@@ -7,17 +7,17 @@ class FixturesCommand extends CConsoleCommand
     
     public function __construct($name,$runner){
         parent::__construct($name,$runner);
-        $this->fixturesPath = Yii::getPathOfAlias('root').'/console/fixtures';
+        $this->fixturesPath = Yii::getPathOfAlias('application').'/fixtures';
     }
     
     public function getHelp(){
         echo <<<'EOF'
 Usage: yiic fixtures [load | loadall | list] --type=<name>
  Option "load":
-   This command include fixture class file ( ROOT/console/fixtures/<name>Fixture.php )
+   This command include fixture class file ( ROOT/fixtures/<name>Fixture.php )
    and call load() method. Require --type option.
  Option "loadall":
-   Load all fixtures at ( ROOT/console/fixtures/ ).
+   Load all fixtures at ( ROOT/fixtures/ ).
  Option "list":
    Show all availible fixtures.
 EOF;
